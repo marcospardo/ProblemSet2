@@ -24,11 +24,11 @@ estpost tabstat village_pop income_pc subsidy_rate poor_housing_rate poor_reg_ra
 
 *** Using esttab
 
-***En los dos hay que ver ekl tema de las variables, porque puse label pero no se si tienen que aparecer asi. Ademas ver como poner 0 decimales, centrar titulo y poner titulo "Variable"
+***En los dos hay que ver el tema de las variables, porque puse label pero no se si tienen que aparecer asi. Ademas ver como poner 0 decimales, centrar titulo y poner titulo "Variable"
 
 *Latex 
 
-esttab using PS2_1.tex, replace frag main(mean) aux(sd) nostar unstack noobs nonote label booktabs nopar wide title(Table 1 - Summary Statistics of Villages) eqlabels(, lhs("Variable")) addnotes(Note: The statistics are based on our analysis of ### villages)
+esttab using PS2_1.tex, replace frag cells("count mean(fmt(%13.2fc)) sd(fmt(%13.2fc))") nostar unstack noobs nonote label booktabs nopar wide title(Table 1 - Summary Statistics of Villages) eqlabels(, lhs("Variable")) addnotes(Note: The statistics are based on our analysis of ### villages)
 
 *Word 
 
