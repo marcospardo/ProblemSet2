@@ -28,11 +28,11 @@ estpost tabstat village_pop income_pc subsidy_rate poor_housing_rate poor_reg_ra
 
 *Latex 
 
-esttab using PS2_1.tex, replace frag cells("count mean(fmt(%13.2fc)) sd(fmt(%13.2fc))") nostar unstack noobs nonote label booktabs nopar wide title(Table 1 - Summary Statistics of Villages) eqlabels(, lhs("Variable")) addnotes(Note: The statistics are based on our analysis of ### villages)
+esttab using PS2_1.tex, replace frag cells("count mean(fmt(%13.2fc)) sd(fmt(%13.2fc))") nostar unstack noobs nonote label booktabs nopar wide title(Table 1 - Summary Statistics of Villages) eqlabels(, lhs("Variable")) addnotes(Note: The statistics are based on our analysis of 256 villages)
 
 *Word 
 
-esttab using example.rtf, replace cells("count mean(fmt(%13.2fc)) sd(fmt(%13.2fc))") wide label nonumber nonote noobs title(Table 1 - Summary Statistics of Villages) collabels("Observations" "Mean" "Standard Deviation")  addnotes(Note: The statistics are based on our analysis of ### villages) eqlabels(, lhs("Variable")) 
+esttab using example.rtf, replace cells("count mean(fmt(%13.2fc)) sd(fmt(%13.2fc))") wide label nonumber nonote noobs title(Table 1 - Summary Statistics of Villages) collabels("Observations" "Mean" "Standard Deviation")  addnotes(Note: The statistics are based on our analysis of 256 villages) eqlabels(, lhs("Variable")) 
 
 
 ***Using frmttable
@@ -51,6 +51,34 @@ frmttable using Table1, varlabels statmat(A) sdec(2,2) ctitles("Variables","Mean
 frmttable using Table1.tex, frag varlabels tex statmat(AA) sdec(2,2) ctitles("Variable name","Mean", "SD") replace 
 
 
+*2. 
+
+*Esta mal esto, se debria agregar todas las regresiones en un mismo cuadro como en la pag 204 y 205 del paper, pero no se bien como hacerlo. 
+
+
+reg cgvo poor_housing_rate 
+outreg2 using regresion_poor.tex, tex replace dec(3) title("Table 3 - Regression") ctitle("CGVO")  
+*comentar 
+
+reg cgvo poor_housing_rate precipitation temperature
+outreg2 using regresion_poorprecip.tex, tex replace dec(3) title("Table 4 - Regression") ctitle("CGVO")  
+*comentar 
+
+reg cgvo disability_rate
+outreg2 using regresion_disab.tex, tex replace dec(3) title("Table 4 - Regression") ctitle("CGVO")  
+*comentar 
+
+reg cgvo disability_rate precipitation temperature
+outreg2 using regresion_disabprec.tex, tex replace dec(3) title("Table 5 - Regression") ctitle("CGVO")  
+*comentar 
+
+reg cgvo subsidy_rate 
+outreg2 using regresion_sub.tex, tex replace dec(3) title("Table 6 - Regression") ctitle("CGVO")  
+*comentar
+
+reg cgvo subsidy_rate precipitation temperature
+outreg2 using regresion_disabprec.tex, tex replace dec(3) title("Table 7 - Regression") ctitle("CGVO")
+*comentar 
 
 
 
@@ -60,8 +88,6 @@ frmttable using Table1.tex, frag varlabels tex statmat(AA) sdec(2,2) ctitles("Va
 
 
 
-
-*2) For registered poor households, people with disabilities, subsidized population, and poor housing variables in levels run an OLS regression against “CGVO”. For each variable, run a simple regression and then a regression including precipitation and temperature as controls. Report the output using the command outreg2. Finally, repeat the analysis using a log-lin specification. Analyze qualitatively and quantitatively (sign and statistical significance) each coefficient.
 
 
 
