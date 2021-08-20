@@ -9,47 +9,29 @@ global main "\Users\valul\OneDrive\Documents\UdeSA 2021\Semestre Primavera\Econo
 global output "$main/output"
 global input "$main/input"
 
+
 use China_Data.dta, clear
-cd "C:\Users\valul\OneDrive\Documents\UdeSA 2021\Semestre Primavera\Economía Aplicada\Tutorial 2\output" 					 
-
-
 
 *1) Present a table with summary statistics of the following variables: village_pop, income_pc, subsidy_rate, poor_housing_rate, poor_reg_rate, disability_rate, gov_officials, high_gov_quality, mid_gov_quality, low_gov_quality, ag_rate, business_income_pc, fiscal_rev_pc, fiscal_exp_pc, col_revenue_pc, trained_labor_rate, safe_water_rate, computer_rate, med_ins_rate, and enroll_rate. 
 
 *Replicate it twice: using esttab and frmttable. Add labels to the variables (do not change them by editing the Word/Tex file). Suggestion: when using esttab, use “wide” as an option.
 
 
-
+* Another option
 estpost tabstat village_pop income_pc subsidy_rate poor_housing_rate poor_reg_rate disability_rate gov_officials high_gov_quality mid_gov_quality low_gov_quality ag_rate business_income_pc fiscal_rev_pc fiscal_exp_pc col_revenue_pc trained_labor_rate safe_water_rate computer_rate med_ins_rate enroll_rate, statistics(mean sd) columns(statistics)
 
-*** Using esttab
+esttab . using PS2_1.tex, replace frag main(mean) aux(sd) nostar unstack noobs nonote label wide
 
-***En los dos hay que ver el tema de las variables, porque puse label pero no se si tienen que aparecer asi. Ademas ver como poner 0 decimales, centrar titulo y poner titulo "Variable"
+esttab . using example.rtf, replace main(mean) aux(sd) nostar unstack noobs nonote label wide
 
-*Latex 
-
-esttab using PS2_1.tex, replace frag cells("count mean(fmt(%13.2fc)) sd(fmt(%13.2fc))") nostar unstack noobs nonote label booktabs nopar wide title(Table 1 - Summary Statistics of Villages) eqlabels(, lhs("Variable")) addnotes(Note: The statistics are based on our analysis of 256 villages)
-
-*Word 
-
-esttab using example.rtf, replace cells("count mean(fmt(%13.2fc)) sd(fmt(%13.2fc))") wide label nonumber nonote noobs title(Table 1 - Summary Statistics of Villages) collabels("Observations" "Mean" "Standard Deviation")  addnotes(Note: The statistics are based on our analysis of 256 villages) eqlabels(, lhs("Variable")) 
-
-
-***Using frmttable
-
-tabstat village_pop income_pc subsidy_rate poor_housing_rate poor_reg_rate disability_rate gov_officials high_gov_quality mid_gov_quality low_gov_quality ag_rate business_income_pc fiscal_rev_pc fiscal_exp_pc col_revenue_pc trained_labor_rate safe_water_rate computer_rate med_ins_rate enroll_rate, save statistics(mean sd) columns(statistics)
+* Summary Statistics tables  
+tabstat village_pop income_pc subsidy_rate poor_housing_rate poor_reg_rate disability_rate gov_officials high_gov_quality mid_gov_quality low_gov_quality ag_rate business_income_pc fiscal_rev_pc fiscal_exp_pc col_revenue_pc trained_labor_rate safe_water_rate computer_rate med_ins_rate enroll_rate, save statistics(N mean sd) columns(statistics)
 
 * Save matrix
-matrix A=r(StatTotal)
-
-*La tabla del paper solo incluyo medias y desvios estandares, con lo cual a efectos de replicar esa tabla nos interesan las primeras dos columnas, que guardaremos en la nueva matriz `AA':
-
-matselrc A AA, c(1 2)
-
-frmttable using Table1, varlabels statmat(A) sdec(2,2) ctitles("Variables","Mean", "SD") replace 
-
-frmttable using Table1.tex, frag varlabels tex statmat(AA) sdec(2,2) ctitles("Variable name","Mean", "SD") replace 
-
+matrix Tabla1=r(N mean sd)
+	
+	
+frmttable using "Tabla1.tex", statmat(Tabla1) sdec(0,0,0) substat(1) ctitles("Variables", "Observations", "Mean", "Standard deviation") rtitles("Village population" \ "" \ "Rural per capita net income (yuan)" \ "Subsidy rate (per 1,000)" \ "" \ "Poor housing (per 100 HHs)" \ "" \ "Registered poor households (per 100 HHs)" \ "" \ "Disability rate (per 1,000)" \ "" \ "Number of village officials" \ "" \ "Village officials with “high school and above” education (percent)" \ "" \ "Village officials with middle school education (percent)" \ "" \ "Village officials with “primary school and below” education (percent)" \ "" \ "Agricultural households (per 100 households)" \ "" \ "Per capita business revenue (yuan)" \ "" \ "Village government fiscal revenue per capita (yuan)" \ "" \ "Village government fiscal expenditure per capita (yuan)" \ "" \ "Government collective revenue (yuan)" \ "" \ "Trained laborers (per 100)" \ "" \ "HHs with tap water access (per 100 HHs)"\ "" \ "HHs with computers (per 100 HHs)" \ "" \ "HHs with rural cooperative medical insurance (100 HHs)" \ "" \ ) title("Table 2 - Summary Statistics of NFS Villages" \ "" \ "School enrollment rate for children aged 7–13 (percent)") tex replace
 
 *2. 
 
