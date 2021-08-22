@@ -108,11 +108,11 @@ outreg2 using regresions2.tex, dec(3) replace
 *comentar
 
 reg subsidy_rate cgvo precipitation temperature
-outreg2 using regresions2.tex, dec(3) title("Table 7 - Regression") ctitle("CGVO") append
+outreg2 using regresions2.tex, dec(3) append
 *comentar 
 
 reg poor_housing_rate cgvo
-outreg2 using regresions2.tex, dec(3) title("Table 3 - Regression") ctitle("CGVO") append
+outreg2 using regresions2.tex, dec(3) append
 *comentar 
 
 reg poor_housing_rate cgvo precipitation temperature
@@ -125,18 +125,14 @@ outreg2 using regresions3.tex, dec(3) replace
 *comentar
 
 reg l_subsidy_rate cgvo precipitation temperature
-outreg2 using regresions3.tex, dec(3) title("Table 7 - Regression") ctitle("CGVO") append
+outreg2 using regresions3.tex, dec(3) append
 *comentar 
 
 reg l_poor_housing_rate cgvo
-outreg2 using regresions3.tex, dec(3) title("Table 3 - Regression") ctitle("CGVO") append
+outreg2 using regresions3.tex, dec(3) append
 *comentar 
 
 reg l_poor_housing_rate cgvo precipitation temperature
-outreg2 using regresions3.tex, dec(3) ctitle("Subsidized population (per 1000, log)" "Poor housing (per 100 households, log)") title("Table 2.2—CGVO and Subsidies (logs)") append
+outreg2 using regresions3.tex, dec(3) title("Table 2.2—CGVO and Subsidies (logs)") append
 
 *comentar
-
-*(Para repetir el analisis con un modelo log-lin, lo que hicimos fue generar una variable que estuviese en logaritmos para cada variable explicada, y repetimos el mismo procedimiento usando esa variable como la dependiente).
-
-
